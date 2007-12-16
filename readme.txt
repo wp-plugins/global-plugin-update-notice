@@ -36,6 +36,10 @@ Then just visit your admin area and activate the plugin.
 
 **See Also:** ["Installing Plugins" article on the WP Codex](http://codex.wordpress.org/Managing_Plugins#Installing_Plugins)
 
+== Screenshots ==
+
+1. Example plugin update notification
+
 == ChangeLog ==
 
 **Version 1.0.0**
