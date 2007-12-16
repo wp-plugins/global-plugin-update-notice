@@ -3,7 +3,7 @@
 **************************************************************************
 
 Plugin Name:  Global Plugin Update Notice
-Plugin URI:   http://wordpress.org/extend/plugins/global-plugin-update-notice/
+Plugin URI:   http://www.viper007bond.com/wordpress-plugins/global-plugin-update-notice/
 Version:      1.0.0
 Description:  When a new version of an activated plugin is available for download from WordPress.org, you will recieve a notice on all admin pages. No more having to check the plugins page!
 Author:       Viper007Bond
