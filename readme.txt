@@ -11,7 +11,7 @@ When a new version of an activated plugin is available for download from WordPre
 
 If you're like me, you want to make sure to always be running the latest version of all of the plugins that you have installed and activated. The problem though is that you have to keep checking your plugins page to see if any have updates available. Even worse, if you have a ton of plugins uploaded to your blog, that list is rather long.
 
-Enter Global Plugin Update Notice. When a new version of an activated plugin is available for download, you will recieve a notice on all admin pages much like you do when a new version of WordPress is available. This saves you time and makes sure your blog is secure and up to date.
+Enter Global Plugin Update Notice. When a new version of an activated plugin is available for download, you will receive a notice on all admin pages much like you do when a new version of WordPress is available. This saves you time and makes sure your blog is secure and up to date.
 
 == Installation ==
 
