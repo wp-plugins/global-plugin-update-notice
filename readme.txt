@@ -42,6 +42,10 @@ Then just visit your admin area and activate the plugin.
 
 == ChangeLog ==
 
+**Version 1.0.1**
+
+* Fixed an issue that occured when there was a single plugin needing updating.
+
 **Version 1.0.0**
 
 * Initial release.
