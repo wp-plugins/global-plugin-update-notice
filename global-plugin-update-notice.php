@@ -4,7 +4,7 @@
 
 Plugin Name:  Global Plugin Update Notice
 Plugin URI:   http://www.viper007bond.com/wordpress-plugins/global-plugin-update-notice/
-Version:      1.0.1
+Version:      1.1.0
 Description:  When a new version of an activated plugin is available for download from WordPress.org, you will recieve a notice on all admin pages. No more having to check the plugins page!
 Author:       Viper007Bond
 Author URI:   http://www.viper007bond.com/
@@ -25,7 +25,7 @@ class GlobalPluginUpdateNotice {
 	// Make wp_update_plugins() run on all admin pages
 	function CheckPlugins() {
 		// Make sure this version of WordPress is new enough to work with this plugin.
-		if ( !function_exists('wp_update_plugins') ) {
+		if ( !file_exists( ABSPATH . 'wp-admin/update.php' ) ) {
 			add_action( 'admin_notices', array(&$this, 'WordPressTooOld') );
 			return;
 		}
@@ -37,7 +37,7 @@ class GlobalPluginUpdateNotice {
 
 	// Displays a message that this version of WordPress is too old
 	function WordPressTooOld() {
-		echo "	<div class='updated'><p>Your version of WordPress is too old for <strong>Global Plugin Update Notice</strong> to work. <a href='http://wordpress.org/download/'>Please update!</a></p></div>\n";
+		echo "	<div class='plugin-update'>Your version of WordPress is too old for this version of <strong>Global Plugin Update Notice</strong> to work. <a href='http://codex.wordpress.org/Upgrading_WordPress'>Please upgrade!</a></div>\n";
 	}
 
 
@@ -55,6 +55,8 @@ class GlobalPluginUpdateNotice {
 
 		$updatelist = array();
 
+		$first = TRUE;
+
 		foreach ( $current->response as $plugin_file => $update_data ) {
 			// Make sure the plugin data is known and that it's activated
 			if ( empty( $plugins[$plugin_file] ) || !in_array( $plugin_file, $active_plugins ) ) continue;
@@ -62,29 +64,21 @@ class GlobalPluginUpdateNotice {
 			// Make syre there is something to display
 			if ( empty($plugins[$plugin_file]['Name']) ) $plugins[$plugin_file]['Name'] = $plugin_file;
 
-			$updatelist[] = array(
-				'name' => $plugins[$plugin_file]['Name'],
-				'url' => $update_data->url,
-				'version' => $update_data->new_version,
-				'file' => $plugin_file,
-			);
+			echo '	<div class="plugin-update"';
+			if ( TRUE != $first ) echo ' style="border-top:none"';
+			echo '>';
+
+			if ( !current_user_can('edit_plugins') )
+				printf( __('There is a new version of %1$s available. <a href="%2$s">Download version %3$s here</a>.'), $plugins[$plugin_file]['Name'], $update_data->url, $update_data->new_version);
+			elseif ( empty($update_data->package) )
+				printf( __('There is a new version of %1$s available. <a href="%2$s">Download version %3$s here</a> <em>automatic upgrade unavailable for this plugin</em>.'), $plugins[$plugin_file]['Name'], $update_data->url, $update_data->new_version);
+			else
+				printf( __('There is a new version of %1$s available. <a href="%2$s">Download version %3$s here</a> or <a href="%4$s">upgrade automatically</a>.'), $plugins[$plugin_file]['Name'], $update_data->url, $update_data->new_version, wp_nonce_url("update.php?action=upgrade-plugin&amp;plugin=$plugin_file", 'upgrade-plugin_' . $plugin_file) );
+
+			echo "</div>\n";
+
+			$first = FALSE;
 		}
-
-		if ( empty($updatelist) ) return; // There are plugins that need updating, but none of them are activated
-
-
-		echo '	<div class="plugin-update">';
-
-		if ( 1 == count($updatelist) ) {
-			printf( __('There is a new version of %s available. <a href="%s">Download version %s here</a>.'), $updatelist[0]['name'], $updatelist[0]['url'], $updatelist[0]['version'] );
-		} else {
-			foreach ( $updatelist as $item ) {
-				$temp[] = '<a href="' . $item['url'] . '">' . $item['name'] . ' ' . $item['version'] . '</a>';
-			}
-			printf( 'There are new versions available of the following plugins: %s', implode( ', ', $temp ) );
-		}
-
-		echo "</div>\n";
 	}
 }
 
