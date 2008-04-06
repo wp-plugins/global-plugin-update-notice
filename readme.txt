@@ -44,6 +44,10 @@ Then just visit your admin area and activate the plugin.
 
 == ChangeLog ==
 
+**Version 1.1.1**
+
+* Don't display this bar on the update plugin page.
+
 **Version 1.1.0**
 
 * Update for WordPress 2.5 by adding "upgrade automatically" links.

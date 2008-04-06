@@ -4,7 +4,7 @@
 
 Plugin Name:  Global Plugin Update Notice
 Plugin URI:   http://www.viper007bond.com/wordpress-plugins/global-plugin-update-notice/
-Version:      1.1.0
+Version:      1.1.1
 Description:  When a new version of an activated plugin is available for download from WordPress.org, you will recieve a notice on all admin pages. No more having to check the plugins page!
 Author:       Viper007Bond
 Author URI:   http://www.viper007bond.com/
@@ -15,7 +15,7 @@ class GlobalPluginUpdateNotice {
 
 	// Plugin initialization
 	function GlobalPluginUpdateNotice() {
-		if ( !is_admin() || !current_user_can('activate_plugins') ) return;
+		if ( !is_admin() || !current_user_can('activate_plugins') || 'update.php' == basename($_SERVER['REQUEST_URI']) ) return;
 
 		add_action( 'admin_head', array(&$this, 'CheckPlugins') ); // admin_head runs at just the right time (init is too early)
 		add_action( 'admin_notices', array(&$this, 'MaybeDisplayUpdateMessage'), 5 );
