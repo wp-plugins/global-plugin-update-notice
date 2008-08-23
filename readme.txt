@@ -3,11 +3,15 @@ Contributors: Viper007Bond
 Donate link: http://www.viper007bond.com/donate/
 Tags: admin, plugins, update, notice, warning
 Requires at least: 2.5
+Tested up to: 2.5
 Stable tag: trunk
 
 When a new version of an activated plugin is available for download from WordPress.org, you will recieve a notice on all admin pages. No more having to check the plugins page!
 
 == Description ==
+
+**As of WordPress 2.6, this plugin is deprecated.** WordPress now displays the number of plugins that need updating on all pages.
+
 
 If you're like me, you want to make sure to always be running the latest version of all of the plugins that you have installed and activated. The problem though is that you have to keep checking your plugins page to see if any have updates available. Even worse, if you have a ton of plugins uploaded to your blog, that list is rather long.
 
